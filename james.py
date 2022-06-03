@@ -21,6 +21,15 @@ message= "JaSonAy"
 print(message [2],end= '')
 print(message [3],end= '')
 print(message [4])
+#append strin in the middle of a given string
+# s1= "ault" 
+# s2= "kelly"
+#create "aultkellylt"
+s1= ('Ault')
+s2= ('Kelly')
+
+
+
 
 
 
