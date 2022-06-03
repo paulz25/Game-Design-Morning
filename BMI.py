@@ -10,6 +10,6 @@ if (BMI <= 18.5):
     print ("you are underweight")
 if (BMI >= 25):
     print ("you are overweight")
-if (BMI > 18.5 and BMI > 25):
+if (BMI > 18.5 and BMI < 25):
     print ("you are healthy")
 
