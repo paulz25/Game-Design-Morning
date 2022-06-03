@@ -3,7 +3,6 @@
 
 
 import os
-from tkinter.tix import INTEGER
 os .system('clear')
 
 variable= input('enter a number') #put number in 
@@ -16,14 +15,12 @@ else:
     print('you are odd') 
 
 
-
-hello = variable/ 3 
-if hello  == int:
-    print (' you are a multiple of 3')
-else: 
-    print ( ' you are not a multiple of 3')
-bye = variable / 5
-if bye == int:
-    print (' you are a multiple of 5')
+if (num%3==0):
+    print ("number is a multiple of 3" )
 else:
-    print (' you are not multiple of 5')
+    print ("number is not a multiple of 3")
+
+if (num%5==0):
+    print ("number is a multiple of 5" )
+else:
+    print ("number is not a multiple of 5") 
