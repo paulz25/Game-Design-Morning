@@ -47,8 +47,15 @@ print(message)
 s1 = "America"
 s2 = "Japan"
 
+word = s1[0] + s2[0] + s1[int(len(s1)/2)] + s2[int(len(s1)/2-1)] + s1[int(len(s1)-1)] + s2[int(len(s2)-1)]
+print(word)
+
 message= s1[0] + s2[0] + s1[3] + s2[2:]
 print(message)
+
+word = s1[0] + s2[0] + s1[int(len(s1)/2)] + s2[int(len(s1)/2-1)] + s1[int(len(s1)-1)] + s2[int(len(s2)-1)]
+print(word)
+
 
 
 # Arrange string characters such that lowercase letters should come firstGiven string contains a combination of the lower and upper case letters. Write a program to arrange the characters of a string so that all lowercase letters should come first.
