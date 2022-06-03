@@ -49,8 +49,6 @@ s1 = "America"
 s2 = "Japan"
 
 message= s1[0] + s2[0] + s1[3] + s2[2:]
-print(message) 
-
 
 # Arrange string characters such that lowercase letters should come firstGiven string contains a combination of the lower and upper case letters. Write a program to arrange the characters of a string so that all lowercase letters should come first.
 # give  Pynative 
