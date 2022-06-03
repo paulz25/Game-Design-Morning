@@ -11,19 +11,18 @@ print(string1[len(string1)-1])
 #Write a program to create a new string made of the middle three characters of an input string.
 #JhonDipPeta
 #want Dip
-string1= "JhonDipPeta"
+string1= "JhonDipPeta" #both cases work 
 
-
-print(string1[int(len(string1)/2) - 1], end = "")
+print(string1[int(len(string1)/2)-1], end = "")
 print(string1[int(len(string1)/2)], end = "")
-print(string1[int(len(string1)/2) + 1])
+print(string1[int(len(string1)/2)+1])
 
 #JaSonAy output Son
 string1= "JaSonAy"
-print(string1[(int(len(string1)/2)-1):(int(len(string1)/2) + 2)])
+# print(string1[(int(len(string1)/2)-1):(int(len(string1)/2) + 2)]) 
 print(string1[int(len(string1)/2)-1], end = "")
 print(string1[int(len(string1)/2)], end = "")
-print(string1[int(len(string1)/2)+1], end = "")
+print(string1[int(len(string1)/2)+1])
 
 #append strin in the middle of a given string
 # s1= "ault" 
@@ -33,7 +32,7 @@ print(string1[int(len(string1)/2)+1], end = "")
 s1 = "ault"
 s2 = "kelly"
 
-word =s1[0:int(len(s1)/2)] + s2 + s1[int(len(s1)/2):int(len(s1)-1)]
+word =s1[0:int(len(s1)/2)] + s2 + s1[int(len(s1)/2):int(len(s1))]
 print(word)
 
 s1 = "ault"
@@ -49,6 +48,8 @@ s1 = "America"
 s2 = "Japan"
 
 message= s1[0] + s2[0] + s1[3] + s2[2:]
+print(message)
+
 
 # Arrange string characters such that lowercase letters should come firstGiven string contains a combination of the lower and upper case letters. Write a program to arrange the characters of a string so that all lowercase letters should come first.
 # give  Pynative 
