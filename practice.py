@@ -23,6 +23,6 @@ else:
     # print("i am in false") use only for debugging I will delete or com when I am done 
     message=message.upper()
     print(message)
-print(type(message))
-print(dir(message))
+print(type(message)) # type out 
+print(dir(message)) #what is dir 
 
