@@ -67,7 +67,6 @@ for(i)in range (8): #Running loop so I don't have to code each guess individuall
     print("---------------------------------------------------------------------")#Making it pretty 
     print()#Making it pretty 
     guess = input ("Input a color:") #So user can input their word, also giving a hint that the word is a color 
-
     print()#Making it pretty 
     print("**********************************************************************")#Making it pretty 
     print()#Making it pretty 
