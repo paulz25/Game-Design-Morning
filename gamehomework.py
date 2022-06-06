@@ -81,18 +81,19 @@ for(i)in range (8): #Running loop so I don't have to code each guess individuall
     elif i==7: #When it is the last guess, this will happen ELIF is an else with conditions 
         print("The word was", word) #
         print()#Making it pretty 
-        print("You didn't guess it!!!")
+        print("You didn't guess it!!!") 
         print()#Making it pretty 
-        print(" ----------                -----------")
+        print("             *                    *  ")
         print()
-        print('                     ** ')                                 #I TRIED TO MAKE A BIG SAD FACE!!!! 
-        print('                 **      ** ') 
-        print('             **               ** ') 
-        print('         **                      **')
-        print('      **                            **  ')
-        print('   **                                 **' )
-        print(' **                                     **')
-        print("**                                        **")
+        print("                       .   .")          
+        print('                     .      .')                                 #I TRIED TO MAKE A BIG SAD FACE!!!! 
+        print('                   .         .') 
+        print('                 .             .') 
+        print('                .               .')
+        print('               .                 .')
+        print('              .                   .' )
+        print('             .                     .')
+        print("            .                       .")
         print()
         print("**********************************************************************")#Making it pretty 
     else:
