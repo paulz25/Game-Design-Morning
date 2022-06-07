@@ -84,7 +84,7 @@ for(i)in range (8): #Running loop so I don't have to code each guess individuall
         print()#Making it pretty 
         print("             *                    *  ")
         print()
-        print("                       .   .")          
+        print("                      . . .")          
         print('                     .      .')                                 #I TRIED TO MAKE A BIG SAD FACE!!!! 
         print('                   .         .') 
         print('                 .             .') 
