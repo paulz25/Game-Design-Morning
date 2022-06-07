@@ -77,15 +77,14 @@ while Game:
         print()
         print()
 
-        
-        theword=random.choice(list)
-        name = input("What is your name? ")
-        print(name, end = ", ")
-        answer = input("would you like to play the game? ")
-        answer = answer.lower()
-        if 'n' in answer:
-            Game = False
-            break
+theword=random.choice(list)
+name = input("What is your name? ")
+print(name, end = ", ")
+answer = input("would you like to play the game? ")
+answer = answer.lower()
+if 'n' in answer:
+    Game = False
+    break
 
 while True:
         choice = input("What game would you like to play 1,2, or 3? ")
