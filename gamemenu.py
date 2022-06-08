@@ -6,6 +6,22 @@ os.system ('clear')
 import datetime
 from time import sleep
 seconds=.5
+#psuedocde for adding a score
+#get lists
+#list..=_
+#Game=true 
+#get file qnd define it 
+#def file_ 
+#open the file 
+#file=open/close
+#fernandos code so already hints 
+#add the number 
+#get the score and add in 
+#200-40 , etc. etc. 
+#open file with that and append the file 
+#end 
+
+
 
 theWord=""
 
