@@ -123,8 +123,7 @@ print("your highest score is " + str(high))
 os.system('clear')
 date=datetime.datetime.now() #todays date and time
 screLine= str(score) + "\t"+name+"\t"+ (date.strftime("%m/%d/%Y"))+"\n" #\n is enter \t is tab 
-myFile=open("scre.txt", 'w') #open a file to write it clear the file if it exists 
+myFile=open("scre.txt", 'a') #open a file to write it clear the file if it exists 
 myFile.write(screLine)
-myFile.close()
-
+myFile.close() 
 
