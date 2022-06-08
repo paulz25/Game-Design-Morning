@@ -171,16 +171,16 @@ def option3():
         if count ==5:
             print("sorry")
 
-    score= 200-40*(count-1)
-    if score > high: #print high score 
-        high = score
-    print(name+", your score is "+str(score))    
-    os.system('cls')
-    answer = input("Do you want to play again? ")
-    if ('n' or 'N') in answer:
-        Game = False
-        print("Thank you for playing")
-print("yr highest score is " +str(high))
+    #score= 200-40*(count-1)
+    #if score > high: #print high score 
+       # high = score
+    #print(name+", your score is "+str(score))    
+    #os.system('cls')
+    #answer = input("Do you want to play again? ")
+    #if ('n' or 'N') in answer:
+        #Game = False
+        #print("Thank you for playing")
+#print("yr highest score is " +str(high))
 count=0
 
 
