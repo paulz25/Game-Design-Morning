@@ -1,0 +1,16 @@
+ Instructions for Number Guessing Game:
+
+ ------HELLOOOOOO----------
+ This is a number guessing Game
+ ****************************
+ You are given the options to play differnet levels of challenges
+ 2) Guess numbers between 1-25
+ 3) Guess numbers between 1-50
+ 4) Guess numbers between 1-100
+ input what you would like to play, and then it will ask you to put in a number guess. 
+ the game will tell you if you are right or wrong! 
+ you can quit at any time by pressing exit
+
+ ******* Once you get out of this menu, click you would like to play again**********************
+ -------------------------------------------------
+ HAPPY PLAYING!
