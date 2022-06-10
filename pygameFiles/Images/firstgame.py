@@ -6,7 +6,6 @@ from turtle import width
 import pygame, time, os
 os,os.system('clear')
 pygame.init() #initialize pygame package 
-
 width=700 #like a constant 
 height=700 
 #create display window with any name you like 
