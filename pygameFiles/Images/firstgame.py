@@ -19,6 +19,7 @@ redClr=(255,0,0)
 #pygame.time.delay(2000)
 greenClr=(0,255,0)
 purpleClr=(125,)
+rndmcolorClr=(10,222,75)
 #screen.fill(greenClr)
 #pygame.display.update()
 #pygame.time.delay(2000)
@@ -37,9 +38,10 @@ while run:
             run=False
             print("You Quit")
     pygame.draw.rect(screen,redClr, square)
-    #circle(surface,color,rect)-> Rect
-    
-
+    #rect(surface,color,rect)-> Rect
+    #circle(surface, center, color, radius)
+    pygame.draw.circle(screen,purpleClr, (350,350), 25)
+    pygame.draw.polygon(screen, rndmcolorClr, (10,222,75), points=[(50,100), (100,50), (25,50)]) #creating a triangle 
     pygame.display.update()
 
 
