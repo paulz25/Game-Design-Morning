@@ -1,4 +1,4 @@
-#Zara Paul 
+#Maria Suarez
 #6/9/2022
 #We are learning pygame basic functins, 
 # creating screens, clrs, shape ,move 
@@ -11,7 +11,6 @@
 #picture = pygame. transform. scale(picture, (1280, 720))
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
-from email import message
 import pygame, time,os,random, math
 pygame.init()#initialize the pygame package
 
@@ -30,8 +29,8 @@ screen=pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("My First Game")  #change the title of my window
 
 #images
-bg=pygame.image.load('PygameFiles\images\\bgSmaller.jpg')
-char = pygame.image.load('PygameFiles\images\PixelArtTutorial.png')
+bg=pygame.image.load('pygameFiles/Images/images/bgSmaller.jpeg')
+char = pygame.image.load('pygameFiles/Images/images/PixelArtTutorial.png')
 char = pygame.transform.scale(char, (50, 50))
 # screen.blit(bg, (0,0))
 # pygame.display.update()
@@ -64,6 +63,7 @@ my = 0
 #objects to draw
 square=pygame.Rect(xb,yb,wb,hb)
 insSquare=pygame.Rect(xig,yig,ibox,ibox)
+mountainSqaure = pygame.Rect(250, 320, 180, 250)
 
 #collors
 squareClr=colors.get("pink")
@@ -105,11 +105,19 @@ def Instructions():
     #creating button options
     Button_1 = pygame.Rect(200, 400, 100, 50)
     Button_2 = pygame.Rect(400, 400, 100, 50)
+    Button_3 = pygame.Rect(400, 400, 100, 50)
+    Button_4 = pygame.Rect(400, 400, 100, 50)
+    Button_5 = pygame.Rect(400, 400, 100, 50)
+    Button_6 = pygame.Rect(400, 400, 100, 50)
     pygame.draw.rect(screen, colors.get("limeGreen"), Button_1)
     pygame.draw.rect(screen, colors.get("limeGreen"), Button_2)
+    pygame.draw.rect(screen, colors.get("limeGreen"), Button_3)
+    pygame.draw.rect(screen, colors.get("limeGreen"), Button_4)
+    pygame.draw.rect(screen, colors.get("limeGreen"), Button_5)
+    pygame.draw.rect(screen, colors.get("limeGreen"), Button_6)
 
     #Instructions
-    myFile = open("PygameFiles\instructions.txt", "r")
+    myFile = open("pygameFiles/Images/instructions.txt", "r")
     content = myFile.readlines()
 
     #var to controll change of line
@@ -140,7 +148,7 @@ def Instructions():
                 mx = mousePos[0]
                 my = mousePos[1]
                 if Button_1.collidepoint((mx, my)):
-                    return True
+                    return False
                 if Button_2.collidepoint((mx, my)):
                     return False
 
@@ -157,6 +165,9 @@ while run:
             mousePos = pygame.mouse.get_pos()
             mx = mousePos[0]
             my = mousePos[1]
+            # print(mousePos)
+    
+    pygame.draw.rect(screen, colors.get("white"), mountainSqaure)
     screen.blit(bg, (0,0))
     keys= pygame.key.get_pressed() #this is a list
     #mve square
@@ -195,10 +206,20 @@ while run:
         xig = cx-(ibox/2)
         yig = cy-(ibox/2)
         insSquare=pygame.Rect(xig,yig,ibox,ibox)
+    
+    if square.colliderect(mountainSqaure):
+        square.x = 10
+        square.y = 10
+        charx = 10
+        chary = 10
+
     #rect(surface, color, rect) -> Rect
     pygame.draw.rect(screen, squareClr,square)
     screen.blit(char, (charx, chary))
+
     #circle(surface, color, center, radius)
-    pygame.draw.circle(screen, circleClr, (cx,cy), rad)
     pygame.draw.rect(screen, squareClr, insSquare)
+    pygame.draw.circle(screen, circleClr, (cx,cy), rad)
+
     pygame.display.update()
+    pygame.time.delay(5)
