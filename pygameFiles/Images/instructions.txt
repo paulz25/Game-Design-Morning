@@ -1,0 +1,7 @@
+IN this game we need to use 
+yhe arroe keys to move the square
+to move the circle W,A,S,D 
+
+
+
+Are you ready to play?
