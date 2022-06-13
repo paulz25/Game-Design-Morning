@@ -10,7 +10,6 @@
 #picture = pygame. image. load(filename)
 #picture = pygame. transform. scale(picture, (1280, 720))
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
-from cv2 import insertChannel, sqrt
 import pygame, time,os,random, math
 pygame.init()#initialize the pygame package
 os.system('cls')
@@ -23,15 +22,14 @@ screen=pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("My First Game")  #change the title of my window
 
 #images
-bg=pygame.image.load('PygameFiles\images\\bgSmaller.jpg')
-char = pygame.image.load('PygameFiles\images\PixelArtTutorial.png')
+bg=pygame.image.load('pygameFiles/Images/images/bgSmaller.jpeg')
+char = pygame.image.load('pygameFiles/Images/images/PixelArtTutorial.png')
 char = pygame.transform.scale(char, (50, 50))
 # screen.blit(bg, (0,0))
 # pygame.display.update()
 # pygame.time.delay(5000)
-
-
 #square Var
+
 hb=50
 wb=50
 xb=100
