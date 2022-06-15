@@ -178,7 +178,7 @@ def Instructions(TITLE,FILE):
                 #if Button_1.collidepoint((mx, my)):
                     #return True 
 def settings (): 
-    global WIDTH, HEIGHT, backgrnd, buttoncolor
+    global WIDTH, HEIGHT, backgrnd, buttoncolor, screen
     screen.fill(backgrnd)
     ymenu = 155
     Title = TITLE_FONT.render("Circle eats Square", 1, colors.get("blue"))
