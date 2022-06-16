@@ -178,14 +178,14 @@ def Instructions(TITLE,FILE):
                 #if Button_1.collidepoint((mx, my)):
                     #return True 
 def settings (): 
-    global WIDTH, HEIGHT, backgrnd, buttoncolor, screen
+    global WIDTH, HEIGHT, backgrnd, buttoncolor, screen, mx, my
     screen.fill(backgrnd)
     ymenu = 155
     Title = TITLE_FONT.render("Circle eats Square", 1, colors.get("blue"))
     xd = WIDTH//2 - (Title.get_width()//2)
     screen.blit(Title, (xd, 100))
     Bx = WIDTH//3
-    color = MENU_FONT.render("Randomize button color", 1, colors.get("blue"))
+    colorRand = MENU_FONT.render("Randomize button color", 1, colors.get("blue"))
     bgcolor = MENU_FONT.render("Randomize background color", 1, colors.get("blue"))
     sizeincrease = MENU_FONT.render("Increase screen size",1, colors.get ("blue"))
     sizedecrease = MENU_FONT.render("Decrease screen size",1, colors.get ("blue"))
@@ -200,10 +200,12 @@ def settings ():
     pygame.draw.rect(screen, buttoncolor, Button_ScreensizeIncrease)
     pygame.draw.rect(screen, buttoncolor, Button_ScreensizeDecrease)
 
-    screen.blit(color, (WIDTH//2 - (color.get_width()//2), 160))
+    screen.blit(colorRand, (WIDTH//2 - (colorRand.get_width()//2), 160))
     screen.blit(bgcolor, (WIDTH//2 - (bgcolor.get_width()//2), 210))
     screen.blit(sizeincrease, (WIDTH//2 - (sizeincrease.get_width()//2), 260))
     screen.blit(sizedecrease, (WIDTH//2 - (sizedecrease.get_width()//2), 310))
+
+    pygame.display.update()
 
     while True: 
         for event in pygame.event.get():
@@ -214,16 +216,19 @@ def settings ():
                 mx=mousepos[0]
                 my=mousepos[1]
                 if Button_Background.collidepoint(mx,my):
-                    backgrnd==(random.randint(0,255),random.randint(0,255),random.randint(0,255))
+                    
+                    backgrnd=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
+                    screen.fill(backgrnd)
                 if Button_Characters.collidepoint(mx,my):
-                    buttoncolor==(random.randint(0,255),random.randint(0,255),random.randint(0,255))
-                if Button_ScreensizeIncrease.collidepoint(mx,my):
+                    buttoncolor=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
+                if Button_ScreensizeIncrease.collidepoint(mx,my)and WIDTH < 1100:
                     WIDTH+=100
                     screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
                 if Button_ScreensizeDecrease.collidepoint(mx,my)and WIDTH > 500:
                     WIDTH-=100
-                    screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
-                    
+                    screen=pygame.display.set_mode((WIDTH,HEIGHT))
+            pygame.display.update()
+            settings() 
                     #creen size is plus and minus box 
                     #change width = 800 and redefine screen variables screen=pygame.display.set
 def game1(): 
