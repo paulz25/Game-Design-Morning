@@ -134,6 +134,7 @@ def menu():
 
 def Instructions(TITLE,FILE):
     #rendering text objects
+    Title = TITLE_FONT.render("Instructions", 1, colors.get("blue"))
     Title = TITLE_FONT.render(TITLE, 1, colors.get("blue"))
 
     #fills screen with white
@@ -181,12 +182,12 @@ def settings ():
     global WIDTH, HEIGHT, backgrnd, buttoncolor, screen, mx, my
     screen.fill(backgrnd)
     ymenu = 155
-    Title = TITLE_FONT.render("Circle eats Square", 1, colors.get("blue"))
+    Title = TITLE_FONT.render("Settings", 1, colors.get("blue"))
     xd = WIDTH//2 - (Title.get_width()//2)
     screen.blit(Title, (xd, 100))
     Bx = WIDTH//3
-    colorRand = MENU_FONT.render("Randomize button color", 1, colors.get("blue"))
-    bgcolor = MENU_FONT.render("Randomize background color", 1, colors.get("blue"))
+    colorRand = MENU_FONT.render("Randomize background color", 1, colors.get("blue"))
+    bgcolor = MENU_FONT.render("Randomize button color", 1, colors.get("blue"))
     sizeincrease = MENU_FONT.render("Increase screen size",1, colors.get ("blue"))
     sizedecrease = MENU_FONT.render("Decrease screen size",1, colors.get ("blue"))
 
@@ -216,7 +217,6 @@ def settings ():
                 mx=mousepos[0]
                 my=mousepos[1]
                 if Button_Background.collidepoint(mx,my):
-                    
                     backgrnd=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
                     screen.fill(backgrnd)
                 if Button_Characters.collidepoint(mx,my):
