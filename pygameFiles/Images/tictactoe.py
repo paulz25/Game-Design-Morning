@@ -682,7 +682,7 @@ def checkWinner():
         print("x wins")
     elif markers[2][0]+markers[1][1]+markers[0][2]==-3:
         print("y wins")
-    else:
+    elif markers[0][0] != 0 and markers[0][1] != 0 and markers[0][2] != 0 and markers[1][0] != 0 and markers[1][1] != 0 and markers[1][2] != 0 and markers[2][0] != 0 and markers[2][1] != 0 and markers[2][2] != 0:
         print("you tied")
     
 def gameEnd():
