@@ -12,7 +12,7 @@
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
 import sys
-from turtle import width
+from turtle import done, width
 import pygame, time,os,random, math
 pygame.init()#initialize the pygame package
 
@@ -71,7 +71,7 @@ mountainSqaure = pygame.Rect(250, 320, 180, 250)
 squareClr=colors.get("pink")
 circleClr=colors.get("blue")
 backgrnd=colors.get("white")
-buttoncolor=colors.get('limeGreen')
+buttoncolor=colors.get('pink')
 
 #Game control
 run = True
@@ -190,22 +190,25 @@ def settings ():
     bgcolor = MENU_FONT.render("Randomize button color", 1, colors.get("blue"))
     sizeincrease = MENU_FONT.render("Increase screen size",1, colors.get ("blue"))
     sizedecrease = MENU_FONT.render("Decrease screen size",1, colors.get ("blue"))
+    done = MENU_FONT.render("Done changing settings",1, colors.get ("blue"))
 
-    Button_Background = pygame.Rect(Bx, 150, WIDTH//4, 40)
-    Button_Characters = pygame.Rect(Bx, 200, WIDTH//4, 40)
-    Button_ScreensizeIncrease = pygame.Rect(Bx, 250, WIDTH//4, 40)
-    Button_ScreensizeDecrease = pygame.Rect(Bx, 300, WIDTH//4, 40)
+    Button_Background = pygame.Rect(Bx, 150, WIDTH//3, 40)
+    Button_Characters = pygame.Rect(Bx, 200, WIDTH//3, 40)
+    Button_ScreensizeIncrease = pygame.Rect(Bx, 250, WIDTH//3, 40)
+    Button_ScreensizeDecrease = pygame.Rect(Bx, 300, WIDTH//3, 40)
+    Button_Done = pygame.Rect(Bx, 350, WIDTH//3, 40)
 
     pygame.draw.rect(screen, buttoncolor, Button_Background)
     pygame.draw.rect(screen, buttoncolor, Button_Characters)
     pygame.draw.rect(screen, buttoncolor, Button_ScreensizeIncrease)
     pygame.draw.rect(screen, buttoncolor, Button_ScreensizeDecrease)
+    pygame.draw.rect(screen, buttoncolor, Button_Done)
 
     screen.blit(colorRand, (WIDTH//2 - (colorRand.get_width()//2), 160))
     screen.blit(bgcolor, (WIDTH//2 - (bgcolor.get_width()//2), 210))
     screen.blit(sizeincrease, (WIDTH//2 - (sizeincrease.get_width()//2), 260))
     screen.blit(sizedecrease, (WIDTH//2 - (sizedecrease.get_width()//2), 310))
-
+    screen.blit(done, (WIDTH//2 - (done.get_width()//2), 360)) 
     pygame.display.update()
 
     while True: 
@@ -227,6 +230,8 @@ def settings ():
                 if Button_ScreensizeDecrease.collidepoint(mx,my)and WIDTH > 500:
                     WIDTH-=100
                     screen=pygame.display.set_mode((WIDTH,HEIGHT))
+                if Button_Done.collidepoint(mx,my):
+                    return menu()
             pygame.display.update()
             settings() 
                     #creen size is plus and minus box 
@@ -300,6 +305,5 @@ def game1():
 
         pygame.display.update()
         pygame.time.delay(5)
-
         pygame.display.update()
 menu()
