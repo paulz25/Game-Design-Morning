@@ -11,6 +11,9 @@
 #picture = pygame. transform. scale(picture, (1280, 720))
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
+
+#input name!!!!!!!!!!!!!!
+
 import sys
 from turtle import done, width
 import pygame, time,os,random, math
@@ -29,7 +32,18 @@ clr=colors.get("limeGreen")
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption("My First Game")  #change the title of my window
-
+#game Variable
+player=1
+markers=[]
+lineWidth=10
+Game=True
+gameOver=False
+Xpoints= 0
+Opoints= 0
+MxMy=(0,0)
+print(markers)  
+cirClr=colors.get("blue")
+xClr=colors.get("BLACK")
 #images
 bg=pygame.image.load('pygameFiles/Images/images/bgSmaller.jpeg')
 char = pygame.image.load('pygameFiles/Images/images/PixelArtTutorial.png')
@@ -308,4 +322,152 @@ def game1():
         pygame.display.update()
 
 def game2():
+    pygame.display.set_caption("Tic Tac Toe")  #change the title of my window
+    backgrnd=colors.get("pink")
+    def zero_Array(): 
+        for x in range(3):
+            row= [0] *3
+        markers.append(row)
+
+
+    def draw_grid():
+        lineClr=colors.get("white")
+        for x in range(1,3):
+            pygame.draw.line(screen,lineClr,(0,HEIGHT//3*x),(WIDTH,HEIGHT//3*x),lineWidth)  #Hztal line
+            pygame.draw.line(screen,lineClr,(WIDTH//3*x, 0),(WIDTH//3*x,HEIGHT),lineWidth)  #Vert line
+        pygame.time.delay(100)
+
+    def draw_Markers():
+        xValue=0
+        for x in markers:   # getting a rw
+            yValue=0
+            for y in x:  #each elem fthe rw
+                if y ==1:
+                    #print ("x")
+                    pygame.draw.line(screen,xClr,(xValue * WIDTH//3 + 15, yValue * HEIGHT//3 + 15), (xValue * WIDTH//3 + WIDTH//3-15, yValue * WIDTH//3 + WIDTH//3-15),lineWidth)
+                    pygame.draw.line(screen, xClr,(xValue*WIDTH//3 +WIDTH//3-15, yValue*HEIGHT//3+15),(xValue *WIDTH//3+15,yValue*HEIGHT//3+HEIGHT//3-15),lineWidth)
+                if y==-1:
+                    #print("O")
+                    pygame.draw.circle(screen,cirClr,(xValue*WIDTH//3+WIDTH//6,yValue*HEIGHT//3 +HEIGHT//6),WIDTH//6-15, lineWidth)
+                yValue +=1
+            xValue +=1
+        pygame.display.update() 
+
+    def checkWinner():
+        global gameOver,winner
+        x_pOs=0
+        for x in markers:
+            #check COL
+            if sum(x) ==3:
+                print("sum")
+                winner = 1
+                gameOver=True
+            if sum(x) ==-3:
+                winner = -1
+                gameOver=True
+            #Check ROWS
+            if markers[0][x_pOs] +markers[1][x_pOs]+markers[2][x_pOs] == 3:
+                winner = 1
+                gameOver=True
+
+            if markers[0][x_pOs] +markers[1][x_pOs]+markers[2][x_pOs] == -3:
+                winner = -1
+                gameOver=True
+            x_pOs +=1
+        # #Check DiagOnals 
+        if markers[0][0]+markers[1][1]+markers[2][2] == 3 or markers[2][0]+markers[1][1]+markers[0][2] == 3:
+            winner = 1
+            gameOver=True
+        if markers[0][0]+markers[1][1]+markers[2][2] == -3 or markers[2][0]+markers[1][1]+markers[0][2] == -3:
+            winner = -1
+            gameOver=True
+        #Check FOR a tie
+        if gameOver ==False:
+            tie=True
+            for ROW in markers:
+                for COL in ROW:
+                    if COL ==0:
+                        tie=False
+            #LEts make winner =0 if it is tie
+            if tie:   #in a bOOlean variable dOnt need ==  if tie == True
+                gameOver=True
+                winner=0
+
+    def gameEnd(): 
+        while gameEnd():
+            global Game, Xpoints, Opoints 
+        #we will be displaying here!
+        screen.fill(backgrnd)
+        dis=""
+        if winner == 1:
+            dis="Player X is the winner!"
+            Xpoints += 1 
+        if winner == -1:
+            dis="Player O is the winner!"
+            Opoints += 1 
+        if winner == 0:
+            dis="No one won......."
+        item=MENU_FONT.render(dis, 1, (200,200,200))
+        screen.blit(item,(WIDTH//2 - (item.get_width()//2), 200))  
+        pygame.time.delay(3000)
+        text2= MENU_FONT.render("The game is over. Do you want to play again?", 1, colors.get("blue"))
+        screen.blit(text2,(WIDTH//2 - (text2.get_width()//2),50))
+
+        Button_Yes= pygame.Rect((WIDTH//4, HEIGHT//2), (100, 40))
+        Button_No= pygame.Rect((3*WIDTH//4, HEIGHT//2), (100, 40))
+        pygame.draw.rect(screen, colors.get("limeGreen"), Button_Yes)
+        pygame.draw.rect(screen, colors.get("limeGreen"), Button_No)  
+
+        text3= MENU_FONT.render("Yes play again", 1, colors.get("blue"))
+        screen.blit(text3,(WIDTH//4, HEIGHT//2))
+
+        text4= MENU_FONT.render("No,exit", 1, colors.get("blue"))
+        screen.blit(text4,(3*WIDTH//4, HEIGHT//2))
+
+
+        scoreText = MENU_FONT.render("X has: " + str(Xpoints) + " points    O has: " + str(Opoints) + " points", 1, colors.get("blue"))
+        screen.blit(scoreText,(WIDTH//2 - (scoreText.get_width()//2),100))
     
+        pygame.display.update()
+        loop=True
+        while loop: 
+            for event in pygame.event.get():
+                if event.type==pygame.QUIT:
+                #Menu(mainTitle,messageMenu)
+                    pygame.quit()
+                    sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                MxMy = pygame.mouse.get_pos()
+                mx=MxMy[0]
+                my=MxMy[1]
+                if Button_No.collidepoint((mx, my)):
+                    pygame.quit()
+                    sys.exit()
+                if Button_Yes.collidepoint((mx, my)):
+                    zero_Array()
+                    loop=False
+    zero_Array()
+    while Game:
+        screen.fill(backgrnd)
+        draw_grid()
+        draw_Markers()
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                #Menu(mainTitle,messageMenu)
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                MxMy = pygame.mouse.get_pos()
+                cellx=MxMy[0]//(WIDTH//3)
+                celly=MxMy[1]//(HEIGHT//3)
+                print(cellx, celly)
+                if markers[cellx][celly]==0:
+                    markers[cellx][celly]=player
+                    player *=-1
+                    checkWinner()
+                    if gameOver:
+                        pygame.quit()
+                        sys.exit()     
+        pygame.display.update() 
+        pygame.time.delay(100)
+menu()
