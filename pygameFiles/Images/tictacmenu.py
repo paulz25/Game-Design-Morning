@@ -11,9 +11,6 @@
 #picture = pygame. transform. scale(picture, (1280, 720))
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
-
-#input name!!!!!!!!!!!!!!
-
 import sys
 from turtle import done, width
 import pygame, time,os,random, math
@@ -32,18 +29,7 @@ clr=colors.get("limeGreen")
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption("My First Game")  #change the title of my window
-#game Variable
-player=1
-markers=[]
-lineWidth=10
-Game=True
-gameOver=False
-Xpoints= 0
-Opoints= 0
-MxMy=(0,0)
-print(markers)  
-cirClr=colors.get("blue")
-xClr=colors.get("BLACK")
+
 #images
 bg=pygame.image.load('pygameFiles/Images/images/bgSmaller.jpeg')
 char = pygame.image.load('pygameFiles/Images/images/PixelArtTutorial.png')
@@ -95,10 +81,23 @@ speed=2
 #Menu items
 message = ["Instructions", "Settings", "Game 1", "Game 2", "Scoreboard", "Exit"]
 
+player=1
+markers=[]
+lineWidth=10
+Game=True
+gameOver=False
+Xpoints= 0
+Opoints= 0
+MxMy=(0,0)
+print(markers)  
+cirClr=colors.get("blue")
+xClr=colors.get("BLACK")
+
+
 def menu():
     screen.fill(backgrnd)
     ymenu = 155
-    Title = TITLE_FONT.render("tic tac toe", 1, colors.get("blue"))
+    Title = TITLE_FONT.render("Circle eats Square", 1, colors.get("blue"))
     xd = WIDTH//2 - (Title.get_width()//2)
     screen.blit(Title, (xd, 100))
     Bx = WIDTH//3
@@ -206,11 +205,11 @@ def settings ():
     sizedecrease = MENU_FONT.render("Decrease screen size",1, colors.get ("blue"))
     done = MENU_FONT.render("Done changing settings",1, colors.get ("blue"))
 
-    Button_Background = pygame.Rect(Bx, 150, WIDTH//4, 40)
-    Button_Characters = pygame.Rect(Bx, 200, WIDTH//4, 40)
-    Button_ScreensizeIncrease = pygame.Rect(Bx, 250, WIDTH//4, 40)
-    Button_ScreensizeDecrease = pygame.Rect(Bx, 300, WIDTH//4, 40)
-    Button_Done = pygame.Rect(Bx, 350, WIDTH//4, 40)
+    Button_Background = pygame.Rect(Bx, 150, WIDTH//3, 40)
+    Button_Characters = pygame.Rect(Bx, 200, WIDTH//3, 40)
+    Button_ScreensizeIncrease = pygame.Rect(Bx, 250, WIDTH//3, 40)
+    Button_ScreensizeDecrease = pygame.Rect(Bx, 300, WIDTH//3, 40)
+    Button_Done = pygame.Rect(Bx, 350, WIDTH//3, 40)
 
     pygame.draw.rect(screen, buttoncolor, Button_Background)
     pygame.draw.rect(screen, buttoncolor, Button_Characters)
@@ -222,7 +221,7 @@ def settings ():
     screen.blit(bgcolor, (WIDTH//2 - (bgcolor.get_width()//2), 210))
     screen.blit(sizeincrease, (WIDTH//2 - (sizeincrease.get_width()//2), 260))
     screen.blit(sizedecrease, (WIDTH//2 - (sizedecrease.get_width()//2), 310))
-    screen.blit(sizedecrease, (WIDTH//2 - (done.get_width()//2), 360)) 
+    screen.blit(done, (WIDTH//2 - (done.get_width()//2), 360)) 
     pygame.display.update()
 
     while True: 
@@ -441,8 +440,7 @@ def game2():
                 mx=MxMy[0]
                 my=MxMy[1]
                 if Button_No.collidepoint((mx, my)):
-                    pygame.quit()
-                    sys.exit()
+                    menu()
                 if Button_Yes.collidepoint((mx, my)):
                     zero_Array()
                     loop=False
