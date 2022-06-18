@@ -84,7 +84,7 @@ message = ["Instructions", "Settings", "Game 1", "Game 2", "Scoreboard", "Exit"]
 def menu():
     screen.fill(backgrnd)
     ymenu = 155
-    Title = TITLE_FONT.render("Circle eats Square", 1, colors.get("blue"))
+    Title = TITLE_FONT.render("tic tac toe", 1, colors.get("blue"))
     xd = WIDTH//2 - (Title.get_width()//2)
     screen.blit(Title, (xd, 100))
     Bx = WIDTH//3
@@ -125,7 +125,7 @@ def menu():
                 if Button_3.collidepoint((mx, my)):
                     game1()
                 if Button_4.collidepoint((mx, my)):
-                    game1()
+                    game2()
                 if Button_5.collidepoint((mx, my)):
                     Instructions ("Scoreboard", "pythonFIles/scre.txt")
                 if Button_6.collidepoint((mx, my)):
@@ -237,7 +237,6 @@ def settings ():
                     #creen size is plus and minus box 
                     #change width = 800 and redefine screen variables screen=pygame.display.set
 def game1(): 
-    clock.tick(60)
     global run, insSquare, charx, chary, cx, cy, rad
     while run:
         # screen.fill(backgrnd)
@@ -307,5 +306,6 @@ def game1():
         pygame.display.update()
         pygame.time.delay(5)
         pygame.display.update()
-        clock.tick(60)
-menu()
+
+def game2():
+    
