@@ -1,19 +1,17 @@
-#Zara Paul 
-# TICTACTOE  
-# zero_Array() 
-# draw_grid() 
-# draw_markers() 
-# checkWinner() 
-# Game_end()
+# Zara Paul 
+#tic tac toe game
+#create functions 
+#create play again 
+#create score 
 
-from asyncore import loop
 import os, random, time, pygame, math, datetime,sys
-os.system('cls')
+
+os.system('clear')
 
 pygame.init()
 
-TITLE_FONT = pygame.font.SysFont('comicsans', 40)
-MENU_FONT = pygame.font.SysFont('comicsans', 20)
+TITLE_FONT = pygame.font.SysFont('comicsans', 100)
+MENU_FONT = pygame.font.SysFont('comicsans', 30)
 
 WIDTH=700 #like constant
 HEIGHT=700
@@ -21,7 +19,6 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "RED" : (255, 0, 0),
 "GREEN" : (0, 255, 0),
 "BLUE" : (0, 0,255),
-# SHADES,
 "BLACK" : (0, 0, 0),
 "DARK_GREY" : (60, 60, 60),
 "DARK_SLATE_GREY" : (47, 79, 79),
@@ -605,165 +602,234 @@ clr=colors.get("limeGreen")
 messageMenu=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Scoreboard', 'Exit']
 messageSettings=["Background Colors", "Screen Size", "Sound On/Off"]
 mainTitle="Circle eats Square Menu"
-buttoncolor=colors.get("limeGreen")
-#create dispay wind with any name y like
-screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
-pygame.display.set_caption("Tic Tac Toe")  #change the title of my window
-backgrnd=colors.get("pink")
 
-#game Variable
+screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
+pygame.display.set_caption("Tic Tac Toe")  
+backgrnd=colors.get("blue")
+
+x_wins = 0
+o_wins = 0   
+
+clock = pygame.time.Clock()
 player=1
-markers=[]
-lineWidth=10
-Game=True
-gameOver=False
-Xpoints= 0
-Opoints= 0
-MxMy=(0,0)
-print(markers)  
-cirClr=colors.get("blue")
-xClr=colors.get("BLACK")
+markers=[]      
+lineWidth=10        
+Game=True     
+Gameover=False      
+MxMy=(0,0)      
+cirClr=colors.get("pink") 
+xClr=colors.get("BLACK") 
+
 def zero_Array(): 
     for x in range(3):
         row= [0] *3
         markers.append(row)
 
-
 def draw_grid():
-    lineClr=colors.get("white")
+    lineClr=colors.get("white") 
     for x in range(1,3):
-        pygame.draw.line(screen,lineClr,(0,HEIGHT//3*x),(WIDTH,HEIGHT//3*x),lineWidth)  #Hztal line
-        pygame.draw.line(screen,lineClr,(WIDTH//3*x, 0),(WIDTH//3*x,HEIGHT),lineWidth)  #Vert line
+        pygame.draw.line(screen,lineClr,(0,HEIGHT//3*x),(WIDTH,HEIGHT//3*x),lineWidth)  
+        pygame.draw.line(screen,lineClr,(WIDTH//3*x, 0),(WIDTH//3*x,HEIGHT),lineWidth) 
     pygame.time.delay(100)
 
-def draw_Markers():
+
+def draw_Markers():   
     xValue=0
-    for x in markers:   # getting a rw
+    for x in markers:  
         yValue=0
-        for y in x:  #each elem fthe rw
+        for y in x:  
             if y ==1:
-                #print ("x")
+                
                 pygame.draw.line(screen,xClr,(xValue * WIDTH//3 + 15, yValue * HEIGHT//3 + 15), (xValue * WIDTH//3 + WIDTH//3-15, yValue * WIDTH//3 + WIDTH//3-15),lineWidth)
                 pygame.draw.line(screen, xClr,(xValue*WIDTH//3 +WIDTH//3-15, yValue*HEIGHT//3+15),(xValue *WIDTH//3+15,yValue*HEIGHT//3+HEIGHT//3-15),lineWidth)
             if y==-1:
-                #print("O")
+                
                 pygame.draw.circle(screen,cirClr,(xValue*WIDTH//3+WIDTH//6,yValue*HEIGHT//3 +HEIGHT//6),WIDTH//6-15, lineWidth)
             yValue +=1
         xValue +=1
     pygame.display.update() 
+
+
 def checkWinner():
-
-    global gameOver,winner
-    x_pOs=0
-    for x in markers:
-        #check COL
-        if sum(x) ==3:
-            print("sum")
+    global markers, Gameover, winner
+    winner = 0
+    length = len(markers) 
+    for x in range(length):
+        if (markers[x][0] + markers[x][1] + markers[x][2]) == 3: 
             winner = 1
-            gameOver=True
-        if sum(x) ==-3:
-            winner = -1
-            gameOver=True
-        #Check ROWS
-        if markers[0][x_pOs] +markers[1][x_pOs]+markers[2][x_pOs] == 3:
+            Gameover = True
+        if (markers[0][x] + markers[1][x] + markers[2][x]) == 3:
             winner = 1
-            gameOver=True
-
-        if markers[0][x_pOs] +markers[1][x_pOs]+markers[2][x_pOs] == -3:
-            winner = -1
-            gameOver=True
-        x_pOs +=1
-    # #Check DiagOnals 
-    if markers[0][0]+markers[1][1]+markers[2][2] == 3 or markers[2][0]+markers[1][1]+markers[0][2] == 3:
+            Gameover = True
+    if (markers[0][0] + markers[1][1]+ markers[2][2]) == 3: 
         winner = 1
-        gameOver=True
-    if markers[0][0]+markers[1][1]+markers[2][2] == -3 or markers[2][0]+markers[1][1]+markers[0][2] == -3:
+        Gameover = True
+    if (markers[2][0]+markers[1][1] +markers[0][2]) == 3: 
+        winner = 1 
+        Gameover = True
+    for x in range(3):
+        if (markers[x][0] + markers[x][1] + markers[x][2]) == -3: 
+            winner = -1
+            Gameover = True
+        if (markers[0][x] + markers[1][x] + markers[2][x]) == -3:
+            winner = -1
+            Gameover = True
+    if (markers[0][0] + markers[1][1]+ markers[2][2]) == -3: 
         winner = -1
-        gameOver=True
-    #Check FOR a tie
-    if gameOver ==False:
-        tie=True
+        Gameover = True
+    if (markers[2][0]+markers[1][1] +markers[0][2]) == -3: 
+        winner = -1 
+        Gameover = True
+    if Gameover == False:
+        Tie = True
         for ROW in markers:
             for COL in ROW:
-                if COL ==0:
-                    tie=False
-        #LEts make winner =0 if it is tie
-        if tie:   #in a bOOlean variable dOnt need ==  if tie == True
-            gameOver=True
-            winner=0
-def gameEnd():
-    global Game, Xpoints, Opoints 
-    #we will be displaying here!
-    screen.fill(backgrnd)
-    dis=""
-    if winner == 1:
-        dis="Player X is the winner!"
-        Xpoints += 1 
-    if winner == -1:
-        dis="Player O is the winner!"
-        Opoints += 1 
-    if winner == 0:
-        dis="No one won......."
-    item=MENU_FONT.render(dis, 1, (200,200,200))
-    screen.blit(item,(WIDTH//2 - (item.get_width()//2), 200))  
-    pygame.time.delay(3000)
-    text2= MENU_FONT.render("The game is over. Do you want to play again?", 1, colors.get("blue"))
-    screen.blit(text2,(WIDTH//2 - (text2.get_width()//2),50))
+                if COL == 0:
+                    Tie = False
+        if Tie:
+            Gameover = True
+            winner = 0            
 
-    Button_Yes= pygame.Rect((WIDTH//4, HEIGHT//2), (100, 40))
-    Button_No= pygame.Rect((3*WIDTH//4, HEIGHT//2), (100, 40))
-    pygame.draw.rect(screen, colors.get("limeGreen"), Button_Yes)
-    pygame.draw.rect(screen, colors.get("limeGreen"), Button_No)  
+    return winner    
 
-    text3= MENU_FONT.render("Yes play again", 1, colors.get("blue"))
-    screen.blit(text3,(WIDTH//4, HEIGHT//2))
-
-    text4= MENU_FONT.render("No,exit", 1, colors.get("blue"))
-    screen.blit(text4,(3*WIDTH//4, HEIGHT//2))
-
-
-    scoreText = MENU_FONT.render("X has: " + str(Xpoints) + " points    O has: " + str(Opoints) + " points", 1, colors.get("blue"))
-    screen.blit(scoreText,(WIDTH//2 - (scoreText.get_width()//2),100))
- 
-    pygame.display.update()
-    loop=True
-    while loop: 
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-            #Menu(mainTitle,messageMenu)
-                pygame.quit()
-                sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            MxMy = pygame.mouse.get_pos()
-            mx=MxMy[0]
-            my=MxMy[1]
-            if Button_No.collidepoint((mx, my)):
-                pygame.quit()
-                sys.exit()
-            if Button_Yes.collidepoint((mx, my)):
-                zero_Array()
-                loop=False
-zero_Array()
-while Game:
-    screen.fill(backgrnd)
-    draw_grid()
-    draw_Markers()
-    for event in pygame.event.get():
-        if event.type==pygame.QUIT:
-            #Menu(mainTitle,messageMenu)
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            MxMy = pygame.mouse.get_pos()
-            cellx=MxMy[0]//(WIDTH//3)
-            celly=MxMy[1]//(HEIGHT//3)
-            print(cellx, celly)
-            if markers[cellx][celly]==0:
-                markers[cellx][celly]=player
-                player *=-1
-                checkWinner()
-                if gameOver:
-                    gameEnd()
+    
+def gameEnd(win):
+    global TITLE_FONT, x_wins, o_wins
+    titley = 100
+    if win == 1:
+        x_wins +=1
+        message = "X wins!"
+        screen.fill("BROWN")
+        Title = TITLE_FONT.render(message, 1, colors.get("blue"))
+        titlex = WIDTH//2 - (Title.get_width()//2)
+        screen.blit(Title, (titlex, titley))
+        score_message = "X won "+str(x_wins)+" games"
+        print(score_message)
+        Score_Show = MENU_FONT.render(score_message, 1, colors.get("BLACK"))
+        Score_Show_X = WIDTH//2 - (Score_Show.get_width()//2)
+        screen.blit(Score_Show, (Score_Show_X, 250))
+        pygame.display.update()
+        pygame.time.delay(2000)
         
+    if win == -1:
+        o_wins +=1
+        message = "O wins!"
+        screen.fill("PURPLE")
+        Title = TITLE_FONT.render(message, 1, colors.get("BLACK"))
+        titlex = WIDTH//2 - (Title.get_width()//2)
+        screen.blit(Title, (titlex, titley))
+        score_message = "O won "+str(o_wins)+" games"
+        print(score_message)
+        Score_Show = MENU_FONT.render(score_message, 1, colors.get("BLACK"))
+        Score_Show_X = WIDTH//2 - (Score_Show.get_width()//2)
+        screen.blit(Score_Show, (Score_Show_X, 250))
+        pygame.display.update()
+        pygame.time.delay(2000)
+    if win == 0:
+        message = "You tied!"
+        screen.fill("green")
+        Title = TITLE_FONT.render(message, 1, colors.get("BLACK"))
+        titlex = WIDTH//2 - (Title.get_width()//2)
+        screen.blit(Title, (titlex, titley))
+        pygame.display.update()
+        pygame.time.delay(1000)
+        
+
+def play_again(): 
+    play_again_titlefont = pygame.font.SysFont('comicsans', 50)
+    buttons_font = pygame.font.SysFont('comicsans', 20)
+    Title = play_again_titlefont.render("Want to play again?", 1, colors.get("BLACK"))
+    text1 = buttons_font.render("yes", 1, colors.get("white"))
+    text2 = buttons_font.render("no", 1, colors.get("white"))
+
+
+    screen.fill(colors.get("blue"))
+    Button_yes = pygame.Rect(150, 400, 130, 50)
+    pygame.draw.rect(screen, colors.get("pink"), Button_yes)
+    Button_no = pygame.Rect(400, 400, 130, 50)
+    pygame.draw.rect(screen, colors.get("pink"), Button_no)
+
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 50))
+    screen.blit(text1, (175, 410))
+    screen.blit(text2, (425, 410))
+
     pygame.display.update() 
-    pygame.time.delay(100)
+    while True:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT: 
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mousePos = pygame.mouse.get_pos() 
+                mx = mousePos[0]
+                my = mousePos[1]
+                if Button_yes.collidepoint((mx, my)): 
+                    return True 
+                if Button_no.collidepoint((mx, my)): 
+                    
+                    if x_wins > o_wins: 
+                        ending_message = "X won more games"
+                    elif x_wins < o_wins:
+                        ending_message = "O won more games"
+                    else:
+                        ending_message = "both players won the same number of games"        
+
+                    screen.fill("BROWN") 
+                    goodbye_text = MENU_FONT.render("Thanks for playing", 1, colors.get("BLACK")) 
+                    goodbye_text_X = WIDTH//2 - (goodbye_text.get_width()//2)
+                    screen.blit(goodbye_text, (goodbye_text_X, 350))
+                    score_message = "X won "+str(x_wins)+" games and O won "+str(o_wins)+" games" 
+                    print(score_message)
+                    Score_Show = MENU_FONT.render(score_message, 1, colors.get("BLACK"))
+                    Score_Show_X = WIDTH//2 - (Score_Show.get_width()//2)
+                    screen.blit(Score_Show, (Score_Show_X, 200)) 
+                    Winner_Show = MENU_FONT.render(ending_message, 1, colors.get("BLACK"))
+                    Winner_Show_X = WIDTH//2 - (Winner_Show.get_width()//2)
+                    screen.blit(Winner_Show, (Winner_Show_X, 270)) 
+                    pygame.display.update() 
+                    pygame.time.delay(5000) 
+                    pygame.quit()
+                    sys.exit()    
+def game2():   
+    global markers, winner, Gameover       
+
+    while True:
+        player=1 
+        lineWidth=10      
+        Game=True       
+        Gameover=False      
+        MxMy=(0,0)     
+        cirClr=colors.get("pink") 
+        xClr=colors.get("BLACK") 
+        markers = [] 
+
+        zero_Array()
+        while Game:
+            clock.tick(60)
+            screen.fill(backgrnd)
+            draw_grid()
+            draw_Markers()
+            for event in pygame.event.get():
+                if event.type==pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    MxMy = pygame.mouse.get_pos()
+                    cellx=MxMy[0]//(WIDTH//3)
+                    celly=MxMy[1]//(HEIGHT//3)
+                    if markers[cellx][celly]==0:
+                        markers[cellx][celly]=player
+                        player *=-1
+                        
+                        winner = checkWinner()
+                        if Gameover: 
+                            draw_Markers()
+                            pygame.display.update()
+                            pygame.time.delay(1000)
+                            gameEnd(winner)
+                            Game = False
+                            play_again() 
+                    
+            pygame.display.update() 
+game2()
