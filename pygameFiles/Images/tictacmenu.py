@@ -687,7 +687,55 @@ MxMy=(0,0)
 print(markers)  
 cirClr=colors.get("blue")
 xClr=colors.get("BLACK")
+def input_name():
+    # name variable
+    user_name = ""
 
+
+    Title = TITLE_FONT.render("Input name", 1, colors.get("blue"))
+    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
+
+    #fills screen with white
+    screen.fill(colors.get("white"))
+
+
+    # renderig fonts to the screen
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 50))
+    # text1_x = WIDTH//2 - (text1.get_width()//2)
+    
+    button_box_x = WIDTH//2 - WIDTH//4
+    Button_box = pygame.Rect(button_box_x, 400, WIDTH//2, 50)
+    pygame.draw.rect(screen, colors.get("pink"), Button_box)
+
+    pygame.display.update()
+    run = True    
+    while run:
+            for event in pygame.event.get():
+                if event.type==pygame.QUIT:
+                    print(user_name)
+                    pygame.quit()
+                    sys.exit()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousePos = pygame.mouse.get_pos()
+                    mx = mousePos[0]
+                    my = mousePos[1]
+                    
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key ==  pygame.K_RETURN: # enter the name
+                        run = False
+                        print(user_name) 
+                    if event.key == pygame.K_BACKSPACE: # remove the last letter of the name
+                        user_name = user_name[0:len(user_name)-1]
+                    elif event.key != pygame.K_RETURN: # add the character to the end of the string
+                        user_name += event.unicode 
+
+                    pygame.draw.rect(screen, colors.get("limeGreen"), Button_box)
+                    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
+                    screen.blit(user_text, (button_box_x + 20, 410))
+                    pygame.display.update()       # updates the screen
 
 def menu():
     screen.fill(backgrnd)
@@ -844,55 +892,6 @@ def settings ():
             settings() 
                     #creen size is plus and minus box 
                     #change width = 800 and redefine screen variables screen=pygame.display.set
-def input_name():
-    # name variable
-    user_name = ""
-
-
-    Title = TITLE_FONT.render("Input your name", 1, colors.get("blue"))
-    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
-
-    #fills screen with white
-    screen.fill(colors.get("white"))
-
-
-    # renderig fonts to the screen
-    xd = WIDTH//2 - (Title.get_width()//2)
-    screen.blit(Title, (xd, 50))
-    # text1_x = WIDTH//2 - (text1.get_width()//2)
-    
-    botton_box_x = WIDTH//2 - WIDTH//4
-    Button_box = pygame.Rect(botton_box_x, 400, WIDTH//2, 50)
-    pygame.draw.rect(screen, colors.get("limeGreen"), Button_box)
-
-    pygame.display.update()
-    run = True    
-    while run:
-            for event in pygame.event.get():
-                if event.type==pygame.QUIT:
-                    print(user_name)
-                    pygame.quit()
-                    sys.exit()
-
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mousePos = pygame.mouse.get_pos()
-                    mx = mousePos[0]
-                    my = mousePos[1]
-                    
-
-                if event.type == pygame.KEYDOWN:
-                    if event.key ==  pygame.K_RETURN: # enter the name
-                        run = False
-                        print(user_name) 
-                    if event.key == pygame.K_BACKSPACE: # remove the last letter of the name
-                        user_name = user_name[0:len(user_name)-1]
-                    elif event.key != pygame.K_RETURN: # add the character to the end of the string
-                        user_name += event.unicode 
-
-                    pygame.draw.rect(screen, colors.get("limeGreen"), Button_box)
-                    user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
-                    screen.blit(user_text, (botton_box_x + 20, 410))
-                    pygame.display.update()       # updates the screen
 def game1(): 
     global run, insSquare, charx, chary, cx, cy, rad
     while run:
@@ -1172,4 +1171,5 @@ def game2():
                             play_again() 
                     
             pygame.display.update() 
+input_name()
 menu()
