@@ -1,34 +1,4 @@
 #zara paul 
-#I need to create a mouse eating cheese and cat eating mouse game 
-#get all necessary imports such as os, etc. 
-#get menu working 
-#menu has settings 
-#menu has exit
-#menu had game options one and two
-# menu also has enter name 
-# menu also has scoreboard 
-# make options for games 
-#games will be mouse vs cat and mouse vs cheese different levels 
-#Games will also be with different maps based on the level
-#I need to import my files 
-#insert files path in get background fill, or get “character”
-#I need to make map one 
-#screen.blit(Image)
-# i also need to figure out how to make the maze a barrier
-# so screen.collidepoint. Etc. etc., maybe if something collides with certain walls it will just stop characters motion (need to research)
-#maybe an if statement, elif for that 
-#character moves and secures cheese
-#everytime the character hits the cheese (collidepoint) the game += 1 to score 
-#score keeps track when hit all 4 cheeses 
-#if you hit the moving targets (cats, etc. you will get killed)
-#if collidepoint >3 while run:
-	#End game 
-#i need to make map two and do the same, change characters, etc. 
-
-import os, pygame, time 
-pygame.init()
-os.system("clear")
-#zara paul 
 #
 import pygame
  
@@ -41,7 +11,7 @@ PURPLE = (255, 0, 255)
  
  
 class Wall(pygame.sprite.Sprite):
-   #represents the bar at the bottom that the player controls 
+    """This class represents the bar at the bottom that the player controls """
  
     def __init__(self, x, y, width, height, color):
  
@@ -58,12 +28,16 @@ class Wall(pygame.sprite.Sprite):
         self.rect.x = x
  
  
-class Player(pygame.sprite.Sprite): #basic code need to add onto this 
-
-    change_x = 0 #speed for now 
+class Player(pygame.sprite.Sprite):
+    """ This class represents the bar at the bottom that the
+    player controls """
+ 
+    # Set speed vector
+    change_x = 0
     change_y = 0
  
-    def __init__(self, x, y): #constructing this 
+    def __init__(self, x, y):
+        """ Constructor function """
  
         # Call the parent's constructor
         super().__init__()
@@ -78,22 +52,25 @@ class Player(pygame.sprite.Sprite): #basic code need to add onto this
         self.rect.x = x
  
     def changespeed(self, x, y):
-       #for settings and chnaginng speed 
+        """ Change the speed of the player. Called with a keypress. """
         self.change_x += x
         self.change_y += y
  
-    def move(self, walls): #making it when the player hits nothing moves 
+    def move(self, walls):
+        """ Find a new position for the player """
  
         # Move left/right
         self.rect.x += self.change_x
  
+        # Did this update cause us to hit a wall?
         block_hit_list = pygame.sprite.spritecollide(self, walls, False)
         for block in block_hit_list:
-            # If we are moving right, set our right side to the left side of item hit 
+            # If we are moving right, set our right side to the left side of
+            # the item we hit
             if self.change_x > 0:
                 self.rect.right = block.rect.left
             else:
-                #opposite 
+                # Otherwise if we are moving left, do the opposite.
                 self.rect.left = block.rect.right
  
         # Move up/down
@@ -104,24 +81,27 @@ class Player(pygame.sprite.Sprite): #basic code need to add onto this
         for block in block_hit_list:
  
             # Reset our position based on the top/bottom of the object.
-            if self.change_y > 0: #our reset would not be dramatic
+            if self.change_y > 0:
                 self.rect.bottom = block.rect.top
             else:
                 self.rect.top = block.rect.bottom
  
  
 class Room(object):
+    """ Base class for all rooms. """
+ 
     # Each room has a list of walls, and of enemy sprites.
     wall_list = None
     enemy_sprites = None
  
     def __init__(self):
+        """ Constructor, create our lists. """
         self.wall_list = pygame.sprite.Group()
         self.enemy_sprites = pygame.sprite.Group()
  
  
 class Room1(Room):
- #creates our "rooms"
+    """This creates all the walls in room 1"""
     def __init__(self):
         super().__init__()
         # Make the walls. (x_pos, y_pos, width, height)
@@ -143,6 +123,7 @@ class Room1(Room):
  
  
 class Room2(Room):
+    """This creates all the walls in room 2"""
     def __init__(self):
         super().__init__()
  
@@ -162,7 +143,7 @@ class Room2(Room):
  
  
 class Room3(Room):
-    #same code as above 
+    """This creates all the walls in room 3"""
     def __init__(self):
         super().__init__()
  
@@ -189,6 +170,7 @@ class Room3(Room):
  
  
 def main():
+    """ Main Program """
  
     # Call this function so the Pygame library can initialize itself
     pygame.init()
@@ -197,7 +179,7 @@ def main():
     screen = pygame.display.set_mode([800, 600])
  
     # Set the title of the window
-    pygame.display.set_caption('Secure the Prize')
+    pygame.display.set_caption('Maze Runner')
  
     # Create the player paddle object
     player = Player(50, 50)
@@ -210,7 +192,7 @@ def main():
     rooms.append(room)
  
     room = Room2()
-    rooms.append(room) #rooms being treated like files in this sense 
+    rooms.append(room)
  
     room = Room3()
     rooms.append(room)
@@ -232,13 +214,13 @@ def main():
  
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    player.changespeed(-5, 0) #moving evrrything around chnaging the coordinates and how much it moves when youclick 
+                    player.changespeed(-5, 0)
                 if event.key == pygame.K_RIGHT:
                     player.changespeed(5, 0)
                 if event.key == pygame.K_UP:
                     player.changespeed(0, -5)
                 if event.key == pygame.K_DOWN:
-                    player.changespeed(0, 5) #moving 5 down, etc. 
+                    player.changespeed(0, 5)
  
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
@@ -250,7 +232,7 @@ def main():
                 if event.key == pygame.K_DOWN:
                     player.changespeed(0, -5)
  
-        # --- Game Logic --- #movinng from rooms and also just having the character move in right sport above 
+        # --- Game Logic ---
  
         player.move(current_room.wall_list)
  
@@ -280,7 +262,7 @@ def main():
             else:
                 current_room_no = 0
                 current_room = rooms[current_room_no]
-                player.rect.x = 0 #refrenced this equation it was complicated to understand at first
+                player.rect.x = 0
  
         # --- Drawing ---
         screen.fill(BLACK)
@@ -288,7 +270,7 @@ def main():
         movingsprites.draw(screen)
         current_room.wall_list.draw(screen)
  
-        pygame.display.flip() #we learbed in class 
+        pygame.display.flip()
  
         clock.tick(60)
  
@@ -296,17 +278,3 @@ def main():
  
 if __name__ == "__main__":
     main()
-
-
-    
-
-
-
-   
-
-  
-        
-
-
-
-
