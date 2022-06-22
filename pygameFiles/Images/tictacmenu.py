@@ -1214,8 +1214,7 @@ def game2():
                             Game = False
                             play_again() 
                     
-            pygame.display.update()
-                    
+            pygame.display.update()        
             pygame.display.update() 
 input_name()
 menu()
