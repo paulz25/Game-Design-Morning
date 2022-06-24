@@ -42,7 +42,7 @@
 
 import sys
 from turtle import done, width
-import pygame, time,os,random, math
+import pygame, time,os,random, math, datetime 
 
 pygame.init()#initialize the pygame package
 
@@ -717,10 +717,11 @@ MxMy=(0,0)
 print(markers)  
 cirClr=colors.get("blue")
 xClr=colors.get("BLACK")
-def input_name():
-    # name variable
-    user_name = "" #making sure no preset name is there 
+user_name=""
 
+def input_name():
+    global user_name
+    # name variable
 
     Title = TITLE_FONT.render("Input name", 1, colors.get("blue")) #input name 
     user_text = MENU_FONT.render(user_name,1, colors.get("BLACK"))
@@ -1183,6 +1184,14 @@ def play_again(num): #playing again and shwoing scpres
     Title = play_again_titlefont.render("Want to play again?", 1, colors.get("BLACK")) #asking player if want to play again 
     text1 = buttons_font.render("yes", 1, colors.get("white")) #txt clr
     text2 = buttons_font.render("no", 1, colors.get("white"))
+    date=datetime.datetime.now()
+
+    score=(end_ticks-start_ticks)
+    print(score)
+    scrLine=str(score)+(': ')+ '     '+ user_name+ "     "+date.strftime("%m-%d-%Y")+ "\n"
+    myFile = open("pythonFIles/scre.txt", "a")
+    myFile.write(str(scrLine))
+    myFile.close()
 
 #making the yes and no values buttons 
     screen.fill(colors.get("blue"))
@@ -1219,14 +1228,15 @@ game_active = False
 background = 0 #setting background to this so it goes 01,23
 un_active_screen = 1
 
-FPS = 30
+FPS = 60
 missel_rect_color_display = BLUE
 bone_color_display = BLUE #for selection if they choose either of them 
-
+end_ticks=0 
+start_ticks=0 
 
 
 def game1():
-    global character_health, background, objects #makeing othe rvariables global 
+    global character_health, background, objects, start_ticks, end_ticks #makeing othe rvariables global 
     objects = 2 #the two objects the guy and the falling items 
     character_health = 1100 #setting this because default
     intro_font = pygame.font.SysFont("comicsans", 100)
@@ -1238,10 +1248,11 @@ def game1():
     game_active=False
     un_active_screen = 1
     bone_index = 0
-
+    timenow=0
 
 
     while run:
+        start_ticks=pygame.time.get_ticks()
         clock.tick(FPS)
         for event in pygame.event.get(): #this returns to menu if exited out of the game 
             if event.type == pygame.QUIT:#this returns to menu if exited out of the game 
@@ -1262,7 +1273,9 @@ def game1():
                 character_health -= 2 #if the healthis here keep play
 
             if character_health <=0:
-                play_again(1) #if health is here u have died 
+                end_ticks=pygame.time.get_ticks()
+                play_again(1) 
+                #if health is here u have died 
     #two timers one thats at the start of movment section and one thats at the end before play again and you subtract the first from second one do new time minus old time 
     #higher is better 
     #append a file
@@ -1377,9 +1390,13 @@ def game1():
                 objects = 2
                 FPS = 60
 
+        timenow += ((pygame.time.get_ticks()- start_ticks)/100)
+        text1="Sec: " + str(timenow)
+        text=MENU_FONT.render(text1,1, BLUE)
+        screen.blit(text,(0,0))
         pygame.display.update()
 def game2():#code same as game one but one variable in code (has comments)
-    global character_health, background, objects
+    global character_health, background, objects, start_ticks, end_ticks
     objects = 2
     character_health = 1100
     intro_font = pygame.font.SysFont("comicsans", 100)
@@ -1391,7 +1408,9 @@ def game2():#code same as game one but one variable in code (has comments)
     game_active=False
     un_active_screen = 1
     bone_index = 0
+    timenow=0
     while run:
+        start_ticks=pygame.time.get_ticks()
         clock.tick(FPS)
 
 
@@ -1414,7 +1433,7 @@ def game2():#code same as game one but one variable in code (has comments)
                 character_health -= 2
 
             if character_health <=0:
-                run = False
+                end_ticks=pygame.time.get_ticks()
                 play_again(2)
         
 
@@ -1530,7 +1549,7 @@ def game2():#code same as game one but one variable in code (has comments)
 
         pygame.display.update()
 def game3(): #CODE ALL THE SAME NO NEEDED COMMENTS (bit one has comments)
-    global character_health, background, objects
+    global character_health, background, objects, start_ticks, end_ticks
     objects = 2
     character_health = 1100
     intro_font = pygame.font.SysFont("comicsans", 100)
@@ -1542,7 +1561,9 @@ def game3(): #CODE ALL THE SAME NO NEEDED COMMENTS (bit one has comments)
     game_active=False
     un_active_screen = 1
     bone_index = 0
+    timenow=0
     while run:
+        start_ticks=pygame.time.get_ticks()
         clock.tick(FPS)
 
 
@@ -1565,6 +1586,7 @@ def game3(): #CODE ALL THE SAME NO NEEDED COMMENTS (bit one has comments)
                 character_health -= 2
 
             if character_health <=0:
+                end_ticks=pygame.time.get_ticks()
                 play_again(3)
         
 
@@ -1662,17 +1684,17 @@ def game3(): #CODE ALL THE SAME NO NEEDED COMMENTS (bit one has comments)
                 missel_rect_color_display = RED
             else:
                 missel_rect_color_display = BLUE
-            if bone_rect_color.collidepoint(mouse_pos):
+            if bone_rect_color.collidepoint(mouse_pos): #if you select the missl eit turns red if not, blue. same fo rthe other item 
                 bone_color_display = RED
             else:
                 bone_color_display = BLUE
-            if missel_rect_color.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
+            if missel_rect_color.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]: #if you select the missl eit turns red if not, blue. same fo rthe other item 
                 un_active_screen = 3
                 game_active = True #same what I said above 
                 objects = 1
                 FPS = 60
 
-            if bone_rect_color.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]:
+            if bone_rect_color.collidepoint(mouse_pos) and pygame.mouse.get_pressed()[0]: #if you select the missl eit turns red if not, blue. same fo rthe other item 
                 un_active_screen = 3
                 game_active = True
                 objects = 2
