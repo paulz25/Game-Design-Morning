@@ -1,0 +1,14 @@
+
+Hello! 
+
+Welcome to the game 
+
+In this game you will be surviving an attack of your choice
+
+There will be 3 levels in different enviornments 
+
+To move left press a, and to move right press d. 
+
+Watch your health run out in the bar at the top of the screen, the green indicates health and red is death 
+
+Once its all red, you have died 

@@ -25,19 +25,24 @@
 	#End game 
 #i need to make map two and do the same, change characters, etc. 
 
-import os, pygame, time 
+import os, pygame, time
 pygame.init()
 os.system("clear")
 #zara paul 
 #
 import pygame
- 
+WIDTH=700
+HEIGHT=700
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 PURPLE = (255, 0, 255)
+box = pygame.Rect(WIDTH//3-25, 0, 50, 50)
+down = True
+up = False
+backgrnd= (0,0,0)
  
  
 class Wall(pygame.sprite.Sprite):
@@ -108,6 +113,8 @@ class Player(pygame.sprite.Sprite): #basic code need to add onto this
                 self.rect.bottom = block.rect.top
             else:
                 self.rect.top = block.rect.bottom
+        
+        #set the value 
  
  
 class Room(object):
@@ -140,6 +147,7 @@ class Room1(Room):
         for item in walls:
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wall_list.add(wall)
+
  
  
 class Room2(Room):
@@ -189,7 +197,7 @@ class Room3(Room):
  
  
 def main():
- 
+
     # Call this function so the Pygame library can initialize itself
     pygame.init()
  
@@ -222,10 +230,11 @@ def main():
  
     done = False
  
-    while not done:
- 
+    while not done: #put room number if statement for the moving box
         # --- Event Processing ---
- 
+        screen.fill((0,0,0))  
+        pygame.time.delay(50)
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -249,47 +258,65 @@ def main():
                     player.changespeed(0, 5)
                 if event.key == pygame.K_DOWN:
                     player.changespeed(0, -5)
+
+        # if current_room_no == 0:
+        #     if box.y >= 650:
+        #         up = True
+        #         down = False
+
+        #     if box.y <= 0:
+        #         up = False
+        #         down = True
+            
+        #     if up:
+        #         box.y -= 5
+            
+        #     if down:
+        #         box.y += 5
+        # pygame.draw.rect(screen, (255,0,0), box)
+        # pygame.display.update()
+
  
         # --- Game Logic --- #movinng from rooms and also just having the character move in right sport above 
  
         player.move(current_room.wall_list)
- 
+    
         if player.rect.x < -15:
-            if current_room_no == 0:
-                current_room_no = 2
-                current_room = rooms[current_room_no]
-                player.rect.x = 790
-            elif current_room_no == 2:
-                current_room_no = 1
-                current_room = rooms[current_room_no]
-                player.rect.x = 790
-            else:
-                current_room_no = 0
-                current_room = rooms[current_room_no]
-                player.rect.x = 790
- 
+                if current_room_no == 0:
+                    current_room_no = 2
+                    current_room = rooms[current_room_no]
+                    player.rect.x = 790
+                elif current_room_no == 2:
+                    current_room_no = 1
+                    current_room = rooms[current_room_no]
+                    player.rect.x = 790
+                else:
+                    current_room_no = 0
+                    current_room = rooms[current_room_no]
+                    player.rect.x = 790
+    
         if player.rect.x > 801:
-            if current_room_no == 0:
-                current_room_no = 1
-                current_room = rooms[current_room_no]
-                player.rect.x = 0
-            elif current_room_no == 1:
-                current_room_no = 2
-                current_room = rooms[current_room_no]
-                player.rect.x = 0
-            else:
-                current_room_no = 0
-                current_room = rooms[current_room_no]
-                player.rect.x = 0 #refrenced this equation it was complicated to understand at first
- 
-        # --- Drawing ---
+                if current_room_no == 0:
+                    current_room_no = 1
+                    current_room = rooms[current_room_no]
+                    player.rect.x = 0
+                elif current_room_no == 1:
+                    current_room_no = 2
+                    current_room = rooms[current_room_no]
+                    player.rect.x = 0
+                else:
+                    current_room_no = 0
+                    current_room = rooms[current_room_no]
+                    player.rect.x = 0 #refrenced this equation it was complicated to understand at first
+    
+            # --- Drawing ---
         screen.fill(BLACK)
- 
+    # put in draw rect for mving thing 
         movingsprites.draw(screen)
         current_room.wall_list.draw(screen)
- 
-        pygame.display.flip() #we learbed in class 
- 
+    
+        pygame.display.flip() #we learned in class 
+    
         clock.tick(60)
  
     pygame.quit()
